@@ -19,17 +19,22 @@ public class VonageController {
 	@PostMapping("/send")
 	public void send() {
 		// Initilise Vonage client
-		VonageClient client = VonageClient.builder().apiKey("API_KEY").apiSecret("API_SECRET").build();
-		
-		TextMessage message = new TextMessage("The SMS Title", "YOUR_PHONE_NUMBER",
-				"The SMS content");
+		//VonageClient client = VonageClient.builder().apiKey("API_KEY").apiSecret("API_SECRET").build();
+
+		VonageClient client = VonageClient.builder().apiKey("bdf904da").apiSecret("xR5xIhqNW5fEc2pE").build();
+
+
+		TextMessage message = new TextMessage("Vonage APIs",
+				"8801521746385",
+				"A text message sent using the Vonage SMS API"
+		);
 
 		SmsSubmissionResponse response = client.getSmsClient().submitMessage(message);
 
 		if (response.getMessages().get(0).getStatus() == MessageStatus.OK) {
-			logger.info("Message sent successfully.");
+			System.out.println("Message sent successfully.");
 		} else {
-			logger.info("Message failed with error: " + response.getMessages().get(0).getErrorText());
+			System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
 		}
 	}
 }
